@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="project19.css">
+</head>
+<body>
+    <div class="container">
+        <div class="panel active" style="background-image: url('https://ghantee.com/wp-content/uploads/2020/05/lord-shiva-hd-wallpapers-for-mobile.jpg')">
+          <h3>Lord Shiva</h3>
+        </div>
+        <div class="panel" style="background-image: url('https://i.pinimg.com/originals/e5/94/de/e594deecacd987364f8ca28d8415bbf3.jpg')">
+          <h3>Natraj</h3>
+        </div>
+        <div class="panel" style="background-image: url('https://hindutrend.com/wp-content/uploads/2021/03/sivan-photos-download.jpg')">
+          <h3>Chandrashekhar</h3>
+        </div>
+        <div class="panel" style="background-image: url('https://www.bhaktiphotos.com/wp-content/uploads/2021/01/lord-shiva-8k-ultra-hd-wallpapers.jpg')">
+          <h3>Nilkanth</h3>
+        </div>
+        <div class="panel" style="background-image: url('https://cutewallpaper.org/21/lord-shiva-4k-wallpapers/Lord-Shiva-Wallpapers-For-Mobile-God-Shiva-Rudra-Avatar-Hd-.jpg')">
+          <h3>Pashupati</h3>
+        </div>
+  
+      </div>
+      <script>
+        const panels = document.querySelectorAll('.panel')
+
+panels.forEach(panel => {
+    panel.addEventListener('click', () => {
+        removeActiveClasses()
+        panel.classList.add('active')
+    })
+})
+
+function removeActiveClasses() {
+    panels.forEach(panel => {
+        panel.classList.remove('active')
+    })
+}
+
+      </script>
+</body>
+</html>

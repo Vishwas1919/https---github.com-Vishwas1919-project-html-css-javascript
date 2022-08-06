@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Mukta');
+        :root{}
+        body{
+            margin: 0px;
+            padding: 30px;
+            font-family: "Mukta";
+            overflow: hidden;
+            background: #313131;
+        }
+        canvas{
+            box-shadow: -3px 2px 9px 6px black;
+            cursor: pointer;
+        }
+        .tools{
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            margin-top: 15px;
+        }
+        .tools .color-field{
+            height: 40px;
+            width: 40px;
+            min-height: 40px;
+            min-width: 40px;
+            cursor: pointer;
+            box-sizing: border-box;
+            border-radius: 50%;
+            border: 2px solid white;
+            align-self:center ;
+        }
+        .tools .button{
+            align-self: center;
+            width: 100px;
+            height: 40px;
+            border: 2px solid white;
+            cursor: pointer;
+            background: #222;
+            font-weight: bold;
+            margin: 0 15px;
+
+        }
+        .color-picker{
+            align-self: center;
+            margin: 0 10px;
+            height: 50px;
+
+        }
+        .pen-range{
+            align-self: center;
+            margin:0 10px ;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="field">
+        <canvas id="canvas"></canvas>
+        <div class="tools">
+            <button onclick="undo_last()" type="button" >Undo</button>
+            <button onclick="clear_canvas()" type="button">Clear</button>
+
+            <div onclick="change_color(this)" class="color-field" style="background: red;"></div>
+            <div onclick="change_color(this)" class="color-field" style="background:blue;"></div>
+            <div onclick="change_color(this)" class="color-field" style="background: green;"></div>
+            <div onclick="change_color(this)" class="color-field" style="background: yellow;"></div>
+            
+            <input onInput="draw_color = this.value" type="color"class="color-picker" >
+            <input onInput="draw_color = this.value" type="range" min="1" max="100" class="pen-range">
+        </div>
+    </div>
+    <script>
+        const canvas = document.getElementById("canvas");
+        canvas.width = window.innerWidth - 60;
+        canvas.height = 400;
+
+        let context = canvas.getContext("2d");
+        let start_background_color = "white";
+        context.fillStyle = start_background_color;
+        context.fillRect(0,0,canvas.width,canvas.height);
+
+        
+        let draw_color = "black";
+        let draw_width = "2";
+        let is_drawing = false;
+
+        let restore_array = [];
+        let index = -1;
+
+        function change_color(element){
+            draw_color = element.style.background;
+        }
+
+        canvas.addEventListener("touchstart",start,false);
+        canvas.addEventListener("touchmove",draw,false);
+        canvas.addEventListener("mousedown",start,false);
+        canvas.addEventListener("mousemove",draw,false);
+
+        canvas.addEventListener("touchhend",stop,false);
+        canvas.addEventListener("mouseup",stop,false);
+        canvas.addEventListener("mouseout",stop,false);
+
+
+        function start(event){
+            is_drawing = true;
+            context.beginPath();
+            context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+            event.preventDefault();  
+        }
+        function draw(event){
+            if(is_drawing){
+                context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+                context.strokeStyle = draw_color;
+                context.linewidth = draw_width;
+                context.lineCap = "round";
+                context.lineJoin = "round";
+                context.stroke();
+                }
+        }
+     function stop(event){
+         if(is_drawing){
+             context.stroke();
+             context.closePath();
+             is_drawing = false;
+         }
+         event.preventDefault();
+
+         if( event.type!= 'mouseout'){
+            restore_array.push(context.getImageData(0 , 0 , canvas.width, canvas.height));
+            index+=1;
+         }
+
+        
+         console.log(restore_array);
+     }
+   function clear_canvas(){
+       context.fillStyle="start_background_color";
+       context.clearRect(0 , 0 , canvas.width, canvas.height);
+       context.fillRect(0,0,canvas.width, canvas.height);
+
+       restore_array=[];
+       index=-1;
+   }
+   function undo_last(){
+        if(index <=0){
+            clear_canvas();
+        }else{
+            index-=1;
+            restore_array.pop();
+            context.putImageData(restore_array[index],0,0);
+        }
+   }
+
+    </script>
+</body>
+</html>

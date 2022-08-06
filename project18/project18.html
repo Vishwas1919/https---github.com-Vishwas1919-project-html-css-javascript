@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="project18.css">
+</head>
+<body>
+
+  <div class="blok">
+        <label>
+            How many minutes?:
+            <input type="number" id="minutesInput" value="1">
+        </label>
+        <br>
+          
+          <button class="btn" id="startButton">Start</button>
+          <button class="btn" id="pauseButton">Pause</button>
+          <button class="btn" id="unpauseButton">Continue</button>
+          <div id="counterDisplay">
+
+          </div>
+  </div>
+
+     <script>
+        const minutesInput = document.getElementById("minutesInput"),
+      startButton = document.getElementById("startButton"),
+      pauseButton = document.getElementById("pauseButton"),
+      unpauseButton = document.getElementById("unpauseButton"),
+      counterDiv = document.getElementById("counterDisplay");
+
+
+startButton.addEventListener('click', start);
+pauseButton.addEventListener('click', pauseTimer);
+unpauseButton.addEventListener('click', runTimer);
+let totalSeconds; 
+let timer; 
+
+disable(pauseButton);
+disable(unpauseButton);
+
+
+
+function getMinutes(totalSeconds){
+  return Math.floor(totalSeconds / 60); 
+}
+
+function getSeconds(totalSeconds){
+ let seconds = totalSeconds % 60; 
+ return (seconds < 10 ? "0" + seconds : seconds) 
+}
+
+
+
+function start(){
+  totalSeconds = minutesInput.value * 60; 
+  counterDiv.innerHTML = getMinutes(totalSeconds) + ":" + getSeconds(totalSeconds); 
+  disable(minutesInput); disable(startButton); 
+  runTimer();
+}
+
+function runTimer(){
+  
+  timer = setInterval(tick, 1000);
+  disable(unpauseButton); enable(pauseButton); 
+}
+
+function tick(){
+  if(totalSeconds > 0){
+    totalSeconds--; 
+    counterDiv.innerHTML = getMinutes(totalSeconds) + ":" + getSeconds(totalSeconds); 
+  }
+  else{
+     
+    enable(minutesInput); enable(startButton);
+    disable(pauseButton); disable(unpauseButton);
+  }
+}
+
+function pauseTimer(){
+  
+  clearInterval(timer);
+  disable(pauseButton); enable(unpauseButton);
+}
+
+
+
+function disable(element){ element.setAttribute("disabled",""); }
+function enable(element){ element.removeAttribute("disabled"); }
+
+      </script>
+</body>
+</html>

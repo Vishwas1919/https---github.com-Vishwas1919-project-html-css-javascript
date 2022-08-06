@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="project10.css">
+</head>
+<body>
+    
+    <div id="div1">
+        <lable id="ename"></lable>
+        <input type="text" class="bd" id="name" placeholder="Enter Birthday Boy/Girl Name"><br>
+        <lable id="edate"></lable>
+        <input type="text" class="bd" id="date" placeholder="Enter The Birth Date(DD/MM/YYYY)"><br>
+        <button id="submit" class="btn">ADD</button>
+        <button id="show" class="btn" onclick="show()">SHOW LIST</button>
+        <p id="showdata"><h1 id="showlist"></h1>
+        </p>
+    </div>
+
+    <script>
+
+            var submit=document.getElementById('submit');
+            submit.addEventListener('click',()=>{
+                var name=document.getElementById('name');
+                var date=document.getElementById('date');
+                var mis = localStorage.getItem('date');
+
+            if(mis==null){
+                var myobj=[];
+            }else{
+                myobj=JSON.parse(mis);
+            }
+            var obj={
+                Name:name.value,
+                bdate:date.value
+
+            }
+            myobj.push(obj);
+            localStorage.setItem('date' ,JSON.stringify(myobj));
+            name.value="";
+            date.value="";
+            })
+            let  show=()=>{
+                var showdata=document.getElementById('showdate');
+                var showlist=document.getElementById('showlist');
+
+                var mis=localStorage.getItem('date');
+                if(mis==null){
+                   var  myobj=[];
+
+                }else{
+                    myobj=JSON.parse(mis);
+                }
+                var html="";
+                myobj.forEach((ele) => {
+                    html+=`${ele.Name}&bsb&bsb&bsb&bsb&bsb&bsb${ele.bdate}<br>`
+                });
+                showlist.innerHTML=`Name`
+                showdata.innerHTML= html
+            }
+
+    </script>
+
+
+</body>
+</html

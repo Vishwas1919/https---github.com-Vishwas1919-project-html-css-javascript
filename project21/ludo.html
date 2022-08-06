@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(123, 123, 234);
+        }
+        #player1{
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            text-align: center;
+            align-items: center;
+            position: relative;
+            left: 29px;
+            top: 50px;
+            background-color: aqua;
+            border-radius: 10%;
+        }
+        #player2{
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            text-align: center;
+            align-items: center;
+            position: relative;
+            left: 259px;
+            top:-47px;
+            background-color: aqua;
+            border-radius: 10%;
+            
+        }
+        #chek1{
+            width: 50px;
+            height: 50px;
+            font-size: 30px;
+            color: green;
+            text-align: center;
+
+        }
+        #chek2{
+            width: 50px;
+            height: 50px;
+            font-size: 30px;
+            color: green;
+        }
+        .blok{
+            width: 400px;
+            height: 400px;
+            background-color: black;
+            position: relative;
+            top: 143px;
+            left: 556px;
+            border-radius: 5px;opacity: 0.8;
+        }
+        h1{
+            color: white;
+            text-align: center;
+        }
+        button{
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            font-size: 15px;
+            background-color: royalblue;
+            border: none;
+            border-radius: 5px;
+            position: relative;
+            left: 149px;
+            top: -118px;
+        }
+        
+       
+        </style>
+</head>
+<body>
+
+    <div class="blok">
+        <h1>Ludo Game</h1>
+        <div id="player1">
+            <div id="chek1"></div>
+            player1
+        </div>
+        <div id="player2">
+            <div id="chek2"></div>
+            player2
+        </div>
+       
+
+    
+    
+    <span>
+        <button onclick="doadd()">Play</button>
+    </div>
+    </span>
+    <script>
+        function doadd(){
+
+            let play1=Math.floor(Math.random()*6)+1;
+            var play1dice= document.getElementById('player1').value;
+
+            document.getElementById('chek1').innerText = play1;
+
+            document.getElementById('chek1').setAttribute('src',play1dice);
+
+
+            var play2=Math.floor(Math.random()*6)+1;
+           // var play2dice=`${play2}`
+           var play2dice= document.getElementById('player2').value;
+
+           document.getElementById('chek2').innerText = play2;
+
+           document.getElementById('chek2').setAttribute('src',play2dice);
+
+            if(play1>play2){
+                document.querySelector('h1').innerHTML="Player 1 won ";
+
+            }else if(play1<play2){
+                document.querySelector('h1').innerHTML="Player 2 won ";
+            }else{
+                document.querySelector('h1').innerHTML="DRAW";
+            }
+
+
+        // var a=[2,3,4,5,6,7]
+        // var b= Math.floor(Math.random()*7)
+        // document.getElementById('ludo').innerText=b;
+        
+        
+        }
+        doadd();
+    </script>
+</body>
+</html>

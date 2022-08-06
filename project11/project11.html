@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="project11.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Tic Tac Toe</h1>
+    </div>
+    <div class="box">
+        <div class="row">
+            <input type="text" class="btn" readonly>
+            <input type="text" class="btn" readonly>
+            <input type="text" class="btn" readonly>
+        </div>
+        <div class="row">
+            <input type="text" class="btn" readonly>
+            <input type="text" class="btn" readonly>
+            <input type="text" class="btn" readonly>
+        </div>
+        <div class="row">
+            <input type="text" class="btn" readonly>
+            <input type="text" class="btn" readonly>
+            <input type="text" class="btn" readonly>
+        </div>
+        <p class="result">Player X Turn</p>
+
+        <div class="result">
+            <button id="reset">Reset</button>
+        </div>
+
+
+    </div>
+    <script>
+
+
+        var cells=[" "," "," "," "," "," "," "," "," "];
+        var currentplayer='X';
+        var result=document.querySelector('.result');
+        var btn=document.querySelectorAll('.btn');
+        var condition=[    [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]    ];
+
+
+        var tictoctoy=(Element,index)=>{
+            Element.value=currentplayer;
+            Element.disabled=true;
+            cells[index]=currentplayer;
+            currentplayer=currentplayer=='X'?'O':'X';
+            result.innerHTML= "player ${currentplayer} Turn";
+
+
+            for(var i=0;i<condition.length; i++){
+                var condition=condition[i];
+                var a=cells[condition[0]];
+                var b=cells[condition[1]];
+                var c=cells[condition[2]];
+
+                if(a==' ' || b==' ' || c==" "){
+                    continue;
+                }
+                if((a==b) && (b==c)){
+                    result.innerHTML=`player $ {a} won`;
+                    btn.forEach((btn)=>btn.disabled=true);
+                }
+            }
+        };
+
+        function reset(){
+            cells=[" "," "," "," "," "," "," "," "," "];
+            btn.forEach((btn)=>{
+                btn.value= " ";
+            });
+            currentplayer='X';
+            result.innerHTML=`player X Turn`;
+            btn.forEach((btn)=>btn.disabled=false);
+        };
+        document.querySelector("#reset").addEventListener('click',reset);
+        btn.forEach((btn,i) => {
+            btn.addEventListener('click',()=>tictoctoy(btn,i)); 
+        });
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+body{
+    background-color: steelblue;
+    padding: 0;margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.blok{
+    width: 450px;
+    height: 200px;
+    position: relative;
+    top: 250px;
+    left: 42%;
+    font-size: 30px;
+    border: 1px solid ;
+    text-align: center;
+    margin: 10px;
+    opacity:0.5;
+    background-color:rgb(229, 22, 22);
+}
+.blok label input{
+    width: 50px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 30px;
+    margin: 10px;
+    border: none;
+}
+.btn{
+    width: 100px;
+    height: 50px;
+    border-radius:2px ;
+    color: rgba(14, 157, 222, 0.923);
+    background-color:#fff;
+    border: none;
+    cursor: pointer;
+    font-size:20px ;
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #frm{
+            padding: 20px;
+            border: 2px solid;
+        }
+        #cart{
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px solid;
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+<body>
+    <div id="frm">
+
+        <label>Product Name</label>
+        <input type="text" id="pname"><br>
+
+        <label>Quntity</label>
+        <input type="number" id="pqty"><br>
+
+        <label>Unit Price</label>
+        <input type="number" id="price"><br>
+
+        <button onclick="addItem()">Add item</button>
+    </div>
+
+    <div id="cart"></div>
+    <script>
+         
+         var iname=[]
+         var iquty=[]
+         var iprice=[]
+
+
+        function addItem(){
+            iname.push(document.getElementById('pname').value)
+            iquty.push(document.getElementById('pqty').value)
+            iprice.push(document.getElementById('price').value)
+
+            displaycart();
+        }
+
+        function displaycart(){
+            var cartdata= '<table><tr><th>Product Name</th><th>Quntity</th><th>Price</th><th>Total</th></tr>';
+               var  total=0;
+                
+                for(var i=0; i<iname.length;i++){
+
+                    total+= iquty[i] * iprice[i];
+                    cartdata += "<tr><td>"+ iname[i] +"</td><td>"+parseInt(iquty[i])+"</td><td>" + parseInt(iprice[i])+"</td><td>" + parseInt(iquty[i]*iprice[i]) +"</td><td><button onclick='delelement("+i +")'>Delete</button></td></tr>";
+                }
+
+
+                cartdata+= '<tr><td></td><td></td><td></td><td>'+ parseInt(total) + '<td/></tr></table>';
+                    document.getElementById('cart').innerHTML=cartdata;
+        }
+        function delelement(a){
+            iname.splice(a,1);
+            iquty.splice(a,1);
+            iprice.splice(a,1);
+
+            displaycart();
+        }
+
+    </script>
+</body>
+</html>
